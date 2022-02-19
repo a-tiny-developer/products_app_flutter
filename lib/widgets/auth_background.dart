@@ -35,7 +35,11 @@ class _HeaderIcon extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Icon(Icons.person_pin, size: 100),
+                Icon(
+                  Icons.person_pin,
+                  size: 100,
+                  color: Colors.white,
+                ),
               ],
             ),
           ),

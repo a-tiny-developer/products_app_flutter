@@ -14,7 +14,6 @@ class ProductApp extends StatelessWidget {
       initialRoute: AppRoutes.homeRoute,
       routes: AppRoutes.getAppRoutes,
       theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
     );
   }
 }
