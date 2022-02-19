@@ -4,7 +4,7 @@ class AppTheme {
   static const Color primary = Colors.deepPurple;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-    primaryColor: primary,
+    primaryColor: primary, scaffoldBackgroundColor: Colors.grey[300],
     // textTheme: lightTextTheme,
   );
 
