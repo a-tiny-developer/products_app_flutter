@@ -11,6 +11,7 @@ class CardContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 30),
       padding: const EdgeInsets.all(20),
       decoration: _createCardShape(),
