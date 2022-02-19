@@ -1,14 +1,47 @@
 import 'package:flutter/material.dart';
 
 class AuthBackground extends StatelessWidget {
-  const AuthBackground({Key? key}) : super(key: key);
+  const AuthBackground({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: const [
-        _PurpleBox(),
+      children: [
+        const _PurpleBox(),
+        const _HeaderIcon(),
+        child,
       ],
+    );
+  }
+}
+
+class _HeaderIcon extends StatelessWidget {
+  const _HeaderIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.person_pin, size: 100),
+              ],
+            ),
+          ),
+          const Expanded(flex: 3, child: SizedBox()),
+        ],
+      ),
     );
   }
 }
@@ -22,36 +55,15 @@ class _PurpleBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      width: double.infinity,
       height: size.height * 0.4,
       decoration: _purpleBackground(),
       child: Stack(
         children: const [
-          Positioned(
-            top: 90,
-            left: 30,
-            child: _Bubble(),
-          ),
-          Positioned(
-            top: -40,
-            left: -30,
-            child: _Bubble(),
-          ),
-          Positioned(
-            top: -50,
-            right: -20,
-            child: _Bubble(),
-          ),
-          Positioned(
-            bottom: -50,
-            left: 10,
-            child: _Bubble(),
-          ),
-          Positioned(
-            bottom: 120,
-            right: 20,
-            child: _Bubble(),
-          ),
+          Positioned(top: 90, left: 30, child: _Bubble()),
+          Positioned(top: -40, left: -30, child: _Bubble()),
+          Positioned(top: -50, right: -20, child: _Bubble()),
+          Positioned(bottom: -50, left: 10, child: _Bubble()),
+          Positioned(bottom: 120, right: 20, child: _Bubble()),
         ],
       ),
     );
