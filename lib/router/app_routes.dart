@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/screens.dart';
 
 class AppRoutes {
-  static const homeRoute = LoginScreen.routeName;
+  static const homeRoute = HomeScreen.routeName;
 
   static const screensOptions = <_ScreenRoute>[
     _ScreenRoute(

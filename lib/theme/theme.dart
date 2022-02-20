@@ -4,26 +4,34 @@ class AppTheme {
   static const Color primary = Colors.deepPurple;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-      primaryColor: primary,
-      scaffoldBackgroundColor: Colors.grey[300],
-      inputDecorationTheme: const InputDecorationTheme(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: primary),
+    primaryColor: primary,
+    scaffoldBackgroundColor: Colors.grey[300],
+    inputDecorationTheme: const InputDecorationTheme(
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: primary),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: primary,
+          width: 2,
         ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: primary,
-            width: 2,
-          ),
-        ),
-        labelStyle: TextStyle(
-          color: Colors.grey,
-        ),
-        iconColor: primary,
-      )
-
-      // textTheme: lightTextTheme,
-      );
+      ),
+      labelStyle: TextStyle(
+        color: Colors.grey,
+      ),
+      iconColor: primary,
+    ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      color: primary,
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: primary,
+      elevation: 0,
+    ),
+    // textTheme: lightTextTheme,
+  );
 
   // static const TextTheme lightTextTheme = TextTheme();
 
