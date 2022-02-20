@@ -106,25 +106,34 @@ class _LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           MaterialButton(
-            onPressed: () {
-              if (!loginForm.isValidForm()) {
-                return;
-              }
-              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-            },
+            onPressed: loginForm.isLoading
+                ? null
+                : () async {
+                    FocusScope.of(context).unfocus();
+                    if (!loginForm.isValidForm()) {
+                      return;
+                    }
+                    loginForm.isLoading = true;
+
+                    await Future.delayed(const Duration(seconds: 2));
+                    loginForm.isLoading = false;
+
+                    Navigator.pushReplacementNamed(
+                        context, HomeScreen.routeName);
+                  },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             disabledColor: Colors.grey,
             color: Theme.of(context).primaryColor,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 80,
                 vertical: 15,
               ),
               child: Text(
-                'Login',
-                style: TextStyle(color: Colors.white),
+                loginForm.isLoading ? 'Wait' : 'Login',
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           )
