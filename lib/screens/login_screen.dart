@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:products_app_flutter/providers/login_form_provider.dart';
+import 'package:products_app_flutter/screens/screens.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/widgets.dart';
 
@@ -27,7 +30,10 @@ class LoginScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(height: 30),
-                    const _LoginForm()
+                    ChangeNotifierProvider(
+                      create: (context) => LoginFormProvider(),
+                      child: const _LoginForm(),
+                    ),
                   ],
                 ),
               ),
@@ -54,8 +60,10 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Check key
+    final loginForm = Provider.of<LoginFormProvider>(context);
     return Form(
+      key: loginForm.formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           TextFormField(
@@ -66,6 +74,17 @@ class _LoginForm extends StatelessWidget {
               labelText: 'name@email.com',
               prefixIcon: Icon(Icons.alternate_email),
             ),
+            onChanged: (value) {
+              loginForm.email = value;
+            },
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = RegExp(pattern);
+              return regExp.hasMatch(value ?? '')
+                  ? null
+                  : 'The value entered is not a valid email';
+            },
           ),
           TextFormField(
             autocorrect: false,
@@ -76,11 +95,22 @@ class _LoginForm extends StatelessWidget {
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock),
             ),
+            onChanged: (value) {
+              loginForm.password = value;
+            },
+            validator: (value) {
+              return (value != null && value.length >= 8)
+                  ? null
+                  : 'The password must be 8 or more characters';
+            },
           ),
           const SizedBox(height: 30),
           MaterialButton(
             onPressed: () {
-              // TODO: Login form
+              if (!loginForm.isValidForm()) {
+                return;
+              }
+              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

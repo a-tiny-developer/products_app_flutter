@@ -7,7 +7,7 @@ class AppRoutes {
 
   static const screensOptions = <_ScreenRoute>[
     _ScreenRoute(
-      route: homeRoute,
+      route: HomeScreen.routeName,
       screen: HomeScreen(),
     ),
     _ScreenRoute(
