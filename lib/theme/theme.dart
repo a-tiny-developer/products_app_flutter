@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color primary = Colors.deepPurple;
 
+  static const double valueRadius = 25;
+
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
     scaffoldBackgroundColor: Colors.grey[300],
@@ -30,10 +32,20 @@ class AppTheme {
       backgroundColor: primary,
       elevation: 0,
     ),
-    // textTheme: lightTextTheme,
+    textTheme: lightTextTheme,
   );
 
-  // static const TextTheme lightTextTheme = TextTheme();
+  static const TextTheme lightTextTheme = TextTheme(
+    headline6: TextStyle(
+      fontSize: 20,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
+    bodyText1: TextStyle(
+      fontSize: 15,
+      color: Colors.white,
+    ),
+  );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: primary,
