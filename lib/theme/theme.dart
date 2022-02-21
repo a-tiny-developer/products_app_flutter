@@ -5,6 +5,16 @@ class AppTheme {
 
   static const double valueRadius = 25;
 
+  static const text20 = TextStyle(
+    fontSize: 20,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  );
+  static const text15 = TextStyle(
+    fontSize: 15,
+    color: Colors.white,
+  );
+
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
     scaffoldBackgroundColor: Colors.grey[300],
@@ -32,19 +42,7 @@ class AppTheme {
       backgroundColor: primary,
       elevation: 0,
     ),
-    textTheme: lightTextTheme,
-  );
-
-  static const TextTheme lightTextTheme = TextTheme(
-    headline6: TextStyle(
-      fontSize: 20,
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-    ),
-    bodyText1: TextStyle(
-      fontSize: 15,
-      color: Colors.white,
-    ),
+    // textTheme: lightTextTheme,
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(

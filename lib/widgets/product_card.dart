@@ -71,11 +71,11 @@ class _NotAvailable extends StatelessWidget {
           bottomRight: Radius.circular(AppTheme.valueRadius),
         ),
       ),
-      child: FittedBox(
+      child: const FittedBox(
         fit: BoxFit.contain,
         child: Text(
           'Not Available',
-          style: Theme.of(context).textTheme.headline6,
+          style: AppTheme.text20,
         ),
       ),
     );
@@ -101,11 +101,11 @@ class _PriceTag extends StatelessWidget {
           bottomLeft: Radius.circular(AppTheme.valueRadius),
         ),
       ),
-      child: FittedBox(
+      child: const FittedBox(
         fit: BoxFit.contain,
         child: Text(
           '\$10.99',
-          style: Theme.of(context).textTheme.headline6,
+          style: AppTheme.text20,
         ),
       ),
     );
@@ -130,16 +130,16 @@ class _ProductDetails extends StatelessWidget {
       decoration: _buildBoxDecoration(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           Text(
             'HDD G',
-            style: Theme.of(context).textTheme.headline6,
+            style: AppTheme.text20,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           Text(
             'ID',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: AppTheme.text15,
           )
         ],
       ),
@@ -170,8 +170,8 @@ class _BackgroundImage extends StatelessWidget {
         width: double.infinity,
         height: 400,
         child: FadeInImage(
-          placeholder: AssetImage(Assets.images.jarLoading),
-          image: NetworkImage(Assets.networkImages.placeholder400x300),
+          placeholder: (Assets.images.jarLoadingGif),
+          image: Assets.networkImages.placeholder400x300f6f6f6,
           fit: BoxFit.cover,
         ),
       ),

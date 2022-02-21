@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/providers/login_form_provider.dart';
 import 'package:products_app_flutter/screens/screens.dart';
+import 'package:products_app_flutter/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/widgets.dart';
@@ -25,9 +26,9 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       'Login',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: AppTheme.text15,
                     ),
                     const SizedBox(height: 30),
                     ChangeNotifierProvider(

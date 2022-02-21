@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:products_app_flutter/screens/screens.dart';
 import 'package:products_app_flutter/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,7 +16,12 @@ class HomeScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const ProductCard();
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProductScreen.routeName);
+            },
+            child: const ProductCard(),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
