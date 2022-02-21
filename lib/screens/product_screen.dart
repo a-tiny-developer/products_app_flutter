@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:products_app_flutter/models/models.dart';
 import 'package:products_app_flutter/providers/providers.dart';
+import 'package:products_app_flutter/screens/screens.dart';
 import 'package:products_app_flutter/services/services.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 import 'package:products_app_flutter/widgets/widgets.dart';
@@ -18,7 +19,7 @@ class ProductScreen extends StatelessWidget {
     final product = productService.selectedProduct;
     return ChangeNotifierProvider(
       create: (context) => ProductFormProvider(product: product),
-      child: _ProductScreenBody(productService: productService),
+      child: _ProductScreenBody(productsService: productService),
     );
   }
 }
@@ -26,21 +27,23 @@ class ProductScreen extends StatelessWidget {
 class _ProductScreenBody extends StatelessWidget {
   const _ProductScreenBody({
     Key? key,
-    required this.productService,
+    required this.productsService,
   }) : super(key: key);
 
-  final ProductsService productService;
+  final ProductsService productsService;
 
   @override
   Widget build(BuildContext context) {
     final productForm = Provider.of<ProductFormProvider>(context);
-    final product = productService.selectedProduct;
+    final product = productsService.selectedProduct;
+
     return Scaffold(
       body: SingleChildScrollView(
         // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 SafeArea(
                   child: ProductImage(
@@ -75,6 +78,10 @@ class _ProductScreenBody extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (productsService.isSaving)
+                  CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
               ],
             ),
             _ProductForm(productForm: productForm),
@@ -87,7 +94,7 @@ class _ProductScreenBody extends StatelessWidget {
           if (!productForm.isValidForm()) {
             return;
           }
-          await productService.saveOrCreateProduct(product);
+          await productsService.saveOrCreateProduct(product);
         },
         child: const Icon(Icons.save_outlined),
       ),
