@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:products_app_flutter/models/product.dart';
+import 'package:products_app_flutter/providers/product_form_provider.dart';
 import 'package:products_app_flutter/services/services.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 import 'package:products_app_flutter/widgets/widgets.dart';
@@ -13,6 +15,23 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productService = Provider.of<ProductsService>(context);
     final product = productService.selectedProduct;
+    return ChangeNotifierProvider(
+      create: (context) => ProductFormProvider(product: product),
+      child: _ProductScreenBody(product: product),
+    );
+  }
+}
+
+class _ProductScreenBody extends StatelessWidget {
+  const _ProductScreenBody({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -76,6 +95,8 @@ class _ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productForm = Provider.of<ProductFormProvider>(context);
+    final product = productForm.product;
     final boxDecoration = BoxDecoration(
       color: Colors.white,
       borderRadius: const BorderRadius.only(
@@ -99,6 +120,14 @@ class _ProductForm extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             TextFormField(
+              initialValue: product.name,
+              onChanged: (value) => product.name = value,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Name is required';
+                }
+                return null;
+              },
               decoration: const InputDecoration(
                 hintText: 'Product name',
                 labelText: 'Name:',
@@ -106,20 +135,26 @@ class _ProductForm extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             TextFormField(
+              initialValue: product.price.toString(),
+              onChanged: (value) {
+                product.price = double.tryParse(value) == null
+                    ? product.price
+                    : double.parse(value);
+              },
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
-                hintText: '\$150',
+                hintText: '\$999',
                 labelText: 'Price:',
               ),
             ),
             const SizedBox(height: 30),
             SwitchListTile.adaptive(
+              value: product.available,
+              onChanged: (value) {
+                product.available = value;
+              },
               title: const Text('Available'),
               activeColor: Theme.of(context).primaryColor,
-              value: true,
-              onChanged: (value) {
-                // TODO: Pending
-              },
             ),
             const SizedBox(height: 30),
           ],
