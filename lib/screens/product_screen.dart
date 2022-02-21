@@ -77,7 +77,7 @@ class _ProductScreenBody extends StatelessWidget {
                 ),
               ],
             ),
-            const _ProductForm(),
+            _ProductForm(productForm: productForm),
             const SizedBox(height: 100),
           ],
         ),
@@ -98,11 +98,13 @@ class _ProductScreenBody extends StatelessWidget {
 class _ProductForm extends StatelessWidget {
   const _ProductForm({
     Key? key,
+    required this.productForm,
   }) : super(key: key);
+
+  final ProductFormProvider productForm;
 
   @override
   Widget build(BuildContext context) {
-    final productForm = Provider.of<ProductFormProvider>(context);
     final product = productForm.product;
     final boxDecoration = BoxDecoration(
       color: Colors.white,
