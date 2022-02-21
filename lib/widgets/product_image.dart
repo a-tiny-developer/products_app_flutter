@@ -3,7 +3,12 @@ import 'package:products_app_flutter/models/assets_paths.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({Key? key}) : super(key: key);
+  const ProductImage({
+    Key? key,
+    this.imageUrl,
+  }) : super(key: key);
+
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +35,16 @@ class ProductImage extends StatelessWidget {
           topLeft: Radius.circular(AppTheme.valueRadius),
           topRight: Radius.circular(AppTheme.valueRadius),
         ),
-        child: FadeInImage(
-          image: Assets.networkImages.placeholder400x300Green,
-          placeholder: Assets.images.jarLoadingGif,
-          fit: BoxFit.cover,
-        ),
+        child: imageUrl == null
+            ? Image(
+                image: Assets.images.noImagePng,
+                fit: BoxFit.cover,
+              )
+            : FadeInImage(
+                image: NetworkImage(imageUrl!),
+                placeholder: Assets.images.jarLoadingGif,
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

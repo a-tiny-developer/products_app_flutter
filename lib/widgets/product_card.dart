@@ -190,13 +190,16 @@ class _BackgroundImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 400,
-        child: FadeInImage(
-          placeholder: Assets.images.jarLoadingGif,
-          image: imageUrl == null
-              ? Assets.images.noImagePng
-              : NetworkImage(imageUrl!) as ImageProvider<Object>,
-          fit: BoxFit.cover,
-        ),
+        child: imageUrl == null
+            ? Image(
+                image: Assets.images.noImagePng,
+                fit: BoxFit.cover,
+              )
+            : FadeInImage(
+                placeholder: Assets.images.jarLoadingGif,
+                image: NetworkImage(imageUrl!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

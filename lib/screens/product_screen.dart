@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:products_app_flutter/services/services.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 import 'package:products_app_flutter/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -9,13 +11,19 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productService = Provider.of<ProductsService>(context);
+    final product = productService.selectedProduct;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
-                const SafeArea(child: ProductImage()),
+                SafeArea(
+                  child: ProductImage(
+                    imageUrl: product.picture,
+                  ),
+                ),
                 Positioned(
                   top: 60,
                   left: 20,
