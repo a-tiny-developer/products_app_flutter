@@ -3,7 +3,12 @@ import 'package:products_app_flutter/models/models.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+  const ProductCard({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +24,25 @@ class ProductCard extends StatelessWidget {
       decoration: _cardDecoration(),
       child: Stack(
         alignment: Alignment.bottomLeft,
-        children: const [
-          _BackgroundImage(),
-          _ProductDetails(),
+        children: [
+          _BackgroundImage(
+            imageUrl: product.picture,
+          ),
+          _ProductDetails(
+            subTitle: product.id ?? '',
+            title: product.name,
+          ),
           Positioned(
             top: 0,
             right: 0,
-            child: _PriceTag(),
+            child: _PriceTag(price: product.price),
           ),
-          // TODO: Show conditionally
-          Positioned(
-            top: 0,
-            left: 0,
-            child: _NotAvailable(),
-          ),
+          if (!product.available)
+            const Positioned(
+              top: 0,
+              left: 0,
+              child: _NotAvailable(),
+            ),
         ],
       ),
     );
@@ -85,7 +95,10 @@ class _NotAvailable extends StatelessWidget {
 class _PriceTag extends StatelessWidget {
   const _PriceTag({
     Key? key,
+    required this.price,
   }) : super(key: key);
+
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +114,10 @@ class _PriceTag extends StatelessWidget {
           bottomLeft: Radius.circular(AppTheme.valueRadius),
         ),
       ),
-      child: const FittedBox(
+      child: FittedBox(
         fit: BoxFit.contain,
         child: Text(
-          '\$10.99',
+          '\$$price',
           style: AppTheme.text20,
         ),
       ),
@@ -115,7 +128,12 @@ class _PriceTag extends StatelessWidget {
 class _ProductDetails extends StatelessWidget {
   const _ProductDetails({
     Key? key,
+    required this.title,
+    required this.subTitle,
   }) : super(key: key);
+
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -130,15 +148,15 @@ class _ProductDetails extends StatelessWidget {
       decoration: _buildBoxDecoration(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
-            'HDD G',
+            title,
             style: AppTheme.text20,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           Text(
-            'ID',
+            subTitle,
             style: AppTheme.text15,
           )
         ],
@@ -160,7 +178,10 @@ class _ProductDetails extends StatelessWidget {
 class _BackgroundImage extends StatelessWidget {
   const _BackgroundImage({
     Key? key,
+    this.imageUrl,
   }) : super(key: key);
+
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -170,8 +191,10 @@ class _BackgroundImage extends StatelessWidget {
         width: double.infinity,
         height: 400,
         child: FadeInImage(
-          placeholder: (Assets.images.jarLoadingGif),
-          image: Assets.networkImages.placeholder400x300f6f6f6,
+          placeholder: Assets.images.jarLoadingGif,
+          image: imageUrl == null
+              ? Assets.images.noImagePng
+              : NetworkImage(imageUrl!) as ImageProvider<Object>,
           fit: BoxFit.cover,
         ),
       ),

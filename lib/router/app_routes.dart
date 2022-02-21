@@ -18,6 +18,10 @@ class AppRoutes {
       route: ProductScreen.routeName,
       screen: ProductScreen(),
     ),
+    _ScreenRoute(
+      route: LoadingScreen.routeName,
+      screen: LoadingScreen(),
+    ),
   ];
 
   static Map<String, Widget Function(BuildContext)> get getAppRoutes {
