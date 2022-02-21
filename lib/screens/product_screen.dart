@@ -72,7 +72,7 @@ class _ProductScreenBody extends StatelessWidget {
                     onPressed: () async {
                       final picker = ImagePicker();
                       final XFile? pickedFile = await picker.pickImage(
-                        source: ImageSource.camera,
+                        source: ImageSource.gallery,
                         imageQuality: 100,
                       );
                       if (pickedFile == null) {
@@ -88,10 +88,6 @@ class _ProductScreenBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (productsService.isSaving)
-                  CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  ),
               ],
             ),
             _ProductForm(productForm: productForm),
@@ -99,15 +95,28 @@ class _ProductScreenBody extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          if (!productForm.isValidForm()) {
-            return;
-          }
-          await productsService.saveOrCreateProduct(product);
-        },
-        child: const Icon(Icons.save_outlined),
-      ),
+      floatingActionButton: productsService.isSaving
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
+          : FloatingActionButton(
+              onPressed: productsService.isSaving
+                  ? null
+                  : () async {
+                      if (!productForm.isValidForm()) {
+                        return;
+                      }
+                      final String? imageUrl =
+                          await productsService.uploadImage();
+
+                      if (imageUrl != null) {
+                        product.picture = imageUrl;
+                      }
+
+                      await productsService.saveOrCreateProduct(product);
+                    },
+              child: const Icon(Icons.save_outlined),
+            ),
     );
   }
 }
