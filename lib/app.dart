@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:products_app_flutter/services/products_service.dart';
+import 'package:provider/provider.dart';
 
 import 'router/router.dart';
 import 'theme/theme.dart';
 
 class ProductApp extends StatelessWidget {
   const ProductApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductsService(),
+        ),
+      ],
+      child: const _App(),
+    );
+  }
+}
+
+class _App extends StatelessWidget {
+  const _App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
