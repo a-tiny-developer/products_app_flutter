@@ -78,7 +78,8 @@ class _ProductScreenBody extends StatelessWidget {
                       if (pickedFile == null) {
                         return;
                       }
-                      print('Image ${pickedFile.path}');
+                      productsService
+                          .updateSelectedProductImage(pickedFile.path);
                     },
                     icon: const Icon(
                       Icons.camera_alt_outlined,

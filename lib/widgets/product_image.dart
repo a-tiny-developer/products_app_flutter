@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/models/assets_paths.dart';
 import 'package:products_app_flutter/theme/theme.dart';
@@ -37,18 +39,39 @@ class ProductImage extends StatelessWidget {
             topLeft: Radius.circular(AppTheme.valueRadius),
             topRight: Radius.circular(AppTheme.valueRadius),
           ),
-          child: imageUrl == null
-              ? Image(
-                  image: Assets.images.noImagePng,
-                  fit: BoxFit.cover,
-                )
-              : FadeInImage(
-                  image: NetworkImage(imageUrl!),
-                  placeholder: Assets.images.jarLoadingGif,
-                  fit: BoxFit.cover,
-                ),
+          child: _GetImage(picture: imageUrl),
         ),
       ),
+    );
+  }
+}
+
+class _GetImage extends StatelessWidget {
+  const _GetImage({
+    Key? key,
+    required this.picture,
+  }) : super(key: key);
+
+  final String? picture;
+
+  @override
+  Widget build(BuildContext context) {
+    if (picture == null) {
+      return Image(
+        image: Assets.images.noImagePng,
+        fit: BoxFit.cover,
+      );
+    }
+    if (picture!.startsWith('https')) {
+      return FadeInImage(
+        image: NetworkImage(picture!),
+        placeholder: Assets.images.jarLoadingGif,
+        fit: BoxFit.cover,
+      );
+    }
+    return Image.file(
+      File(picture!),
+      fit: BoxFit.cover,
     );
   }
 }
