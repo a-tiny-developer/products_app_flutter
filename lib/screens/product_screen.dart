@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:products_app_flutter/models/product.dart';
-import 'package:products_app_flutter/providers/product_form_provider.dart';
+import 'package:flutter/services.dart';
+import 'package:products_app_flutter/models/models.dart';
+import 'package:products_app_flutter/providers/providers.dart';
 import 'package:products_app_flutter/services/services.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 import 'package:products_app_flutter/widgets/widgets.dart';
@@ -34,6 +35,7 @@ class _ProductScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             Stack(
@@ -141,6 +143,9 @@ class _ProductForm extends StatelessWidget {
                     ? product.price
                     : double.parse(value);
               },
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
+              ],
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: '\$999',
@@ -150,9 +155,7 @@ class _ProductForm extends StatelessWidget {
             const SizedBox(height: 30),
             SwitchListTile.adaptive(
               value: product.available,
-              onChanged: (value) {
-                product.available = value;
-              },
+              onChanged: productForm.updateAvailability,
               title: const Text('Available'),
               activeColor: Theme.of(context).primaryColor,
             ),
