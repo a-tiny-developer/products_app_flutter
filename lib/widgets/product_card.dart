@@ -191,7 +191,7 @@ class _BackgroundImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 400,
-        child: GetImage(pictureUrl: imageUrl),
+        child: GetImage(picture: imageUrl),
       ),
     );
   }

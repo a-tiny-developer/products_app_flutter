@@ -38,7 +38,7 @@ class ProductImage extends StatelessWidget {
             topLeft: Radius.circular(AppTheme.valueRadius),
             topRight: Radius.circular(AppTheme.valueRadius),
           ),
-          child: GetImage(pictureUrl: imageUrl),
+          child: GetImage(picture: imageUrl),
         ),
       ),
     );
