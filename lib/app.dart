@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/services/products_service.dart';
+import 'package:products_app_flutter/services/services.dart';
 import 'package:provider/provider.dart';
 
 import 'router/router.dart';
@@ -14,6 +15,9 @@ class ProductApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProductsService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthService(),
         ),
       ],
       child: const _App(),

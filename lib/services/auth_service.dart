@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
-  final String _firebaseToken = '';
+  final String _firebaseToken = 'AIzaSyCYd-Td7JfNXCgg5iIFBQEhprMWYFPjCBc';
 
+  // if it returns something it is an error
   Future<String?> createUser(String email, String password) async {
     final authData = <String, dynamic>{
       'email': email,
@@ -18,6 +19,12 @@ class AuthService extends ChangeNotifier {
     });
 
     final resp = await http.post(url, body: json.encode(authData));
-    final Map<String,dynamic> decodeResp = json.decode(resp.body);
+    final Map<String, dynamic> decodeResp = json.decode(resp.body);
+
+    if (decodeResp.containsKey('idToken')) {
+      // TODO: Save token in a safe place
+      return decodeResp['idToken'];
+    }
+    return decodeResp['error']['message'];
   }
 }

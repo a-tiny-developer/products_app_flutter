@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/providers/login_form_provider.dart';
 import 'package:products_app_flutter/screens/screens.dart';
+import 'package:products_app_flutter/services/services.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/theme.dart';
@@ -114,16 +115,30 @@ class _LoginForm extends StatelessWidget {
                 ? null
                 : () async {
                     FocusScope.of(context).unfocus();
+                    final authService = Provider.of<AuthService>(
+                      context,
+                      listen: false,
+                    );
+
                     if (!loginForm.isValidForm()) {
                       return;
                     }
+
                     loginForm.isLoading = true;
 
-                    await Future.delayed(const Duration(seconds: 2));
-                    loginForm.isLoading = false;
+                    final String? errorMessage = await authService.createUser(
+                      loginForm.email,
+                      loginForm.password,
+                    );
+                    if (errorMessage == null) {
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
+                    } else {
+                      // TODO: Show Error
+                      debugPrint(errorMessage);
+                    }
 
-                    Navigator.pushReplacementNamed(
-                        context, HomeScreen.routeName);
+                    loginForm.isLoading = false;
                   },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
