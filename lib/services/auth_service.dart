@@ -23,7 +23,29 @@ class AuthService extends ChangeNotifier {
 
     if (decodeResp.containsKey('idToken')) {
       // TODO: Save token in a safe place
-      return decodeResp['idToken'];
+      // return decodeResp['idToken'];
+      return null;
+    }
+    return decodeResp['error']['message'];
+  }
+
+  Future<String?> loginUser(String email, String password) async {
+    final authData = <String, dynamic>{
+      'email': email,
+      'password': password,
+    };
+
+    final url = Uri.https(_baseUrl, 'v1/accounts:signInWithPassword', {
+      'key': _firebaseToken,
+    });
+
+    final resp = await http.post(url, body: json.encode(authData));
+    final Map<String, dynamic> decodeResp = json.decode(resp.body);
+
+    if (decodeResp.containsKey('idToken')) {
+      // TODO: Save token in a safe place
+      // return decodeResp['idToken'];
+      return null;
     }
     return decodeResp['error']['message'];
   }

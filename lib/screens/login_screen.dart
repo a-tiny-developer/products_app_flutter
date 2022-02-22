@@ -4,6 +4,7 @@ import 'package:products_app_flutter/screens/screens.dart';
 import 'package:products_app_flutter/theme/theme.dart';
 import 'package:provider/provider.dart';
 
+import '../services/services.dart';
 import '../widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -114,16 +115,30 @@ class _LoginForm extends StatelessWidget {
                 ? null
                 : () async {
                     FocusScope.of(context).unfocus();
+                    final authService = Provider.of<AuthService>(
+                      context,
+                      listen: false,
+                    );
+
                     if (!loginForm.isValidForm()) {
                       return;
                     }
+
                     loginForm.isLoading = true;
 
-                    await Future.delayed(const Duration(seconds: 2));
-                    loginForm.isLoading = false;
-
-                    Navigator.pushReplacementNamed(
-                        context, HomeScreen.routeName);
+                    // TODO: Check if login is correct
+                    final String? errorMessage = await authService.loginUser(
+                      loginForm.email,
+                      loginForm.password,
+                    );
+                    if (errorMessage == null) {
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
+                    } else {
+                      // TODO: Show Error
+                      debugPrint(errorMessage);
+                      loginForm.isLoading = false;
+                    }
                   },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

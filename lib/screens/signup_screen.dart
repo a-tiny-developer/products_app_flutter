@@ -126,6 +126,7 @@ class _LoginForm extends StatelessWidget {
 
                     loginForm.isLoading = true;
 
+                    // TODO: Check if login is correct
                     final String? errorMessage = await authService.createUser(
                       loginForm.email,
                       loginForm.password,
@@ -136,9 +137,8 @@ class _LoginForm extends StatelessWidget {
                     } else {
                       // TODO: Show Error
                       debugPrint(errorMessage);
+                      loginForm.isLoading = false;
                     }
-
-                    loginForm.isLoading = false;
                   },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
