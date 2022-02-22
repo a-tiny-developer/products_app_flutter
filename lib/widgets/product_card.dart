@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/models/models.dart';
 import 'package:products_app_flutter/theme/theme.dart';
+import 'package:products_app_flutter/widgets/widgets.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -190,16 +191,7 @@ class _BackgroundImage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: 400,
-        child: imageUrl == null
-            ? Image(
-                image: Assets.images.noImagePng,
-                fit: BoxFit.cover,
-              )
-            : FadeInImage(
-                placeholder: Assets.images.jarLoadingGif,
-                image: NetworkImage(imageUrl!),
-                fit: BoxFit.cover,
-              ),
+        child: GetImage(pictureUrl: imageUrl),
       ),
     );
   }

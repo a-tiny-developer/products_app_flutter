@@ -56,6 +56,7 @@ class _ProductScreenBody extends StatelessWidget {
                   left: 20,
                   child: IconButton(
                     onPressed: () {
+                      productsService.newPictureFile = null;
                       Navigator.of(context).pop();
                     },
                     icon: const Icon(
@@ -72,7 +73,7 @@ class _ProductScreenBody extends StatelessWidget {
                     onPressed: () async {
                       final picker = ImagePicker();
                       final XFile? pickedFile = await picker.pickImage(
-                        source: ImageSource.gallery,
+                        source: ImageSource.camera,
                         imageQuality: 100,
                       );
                       if (pickedFile == null) {
@@ -96,8 +97,8 @@ class _ProductScreenBody extends StatelessWidget {
         ),
       ),
       floatingActionButton: productsService.isSaving
-          ? const CircularProgressIndicator(
-              color: Colors.white,
+          ? CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
             )
           : FloatingActionButton(
               onPressed: productsService.isSaving
