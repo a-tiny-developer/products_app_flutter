@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:products_app_flutter/providers/login_form_provider.dart';
 import 'package:products_app_flutter/screens/screens.dart';
-import 'package:products_app_flutter/theme/theme.dart';
 import 'package:provider/provider.dart';
 
+import '../theme/theme.dart';
 import '../widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
-  static const routeName = 'Login';
+  static const routeName = 'SignUp';
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      'Login',
+                      'Sign Up',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(height: 30),
@@ -42,13 +42,13 @@ class LoginScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacementNamed(
-                      context, SignUpScreen.routeName);
+                      context, LoginScreen.routeName);
                 },
                 child: const Text(
-                  'Create a new account',
+                  'Do you have an account?',
                   style: AppTheme.text18Black,
                 ),
-              )
+              ),
             ],
           ),
         ),

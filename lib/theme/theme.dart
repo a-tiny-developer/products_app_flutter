@@ -14,36 +14,50 @@ class AppTheme {
     fontSize: 15,
     color: Colors.white,
   );
+  static const text18Black = TextStyle(
+    fontSize: 18,
+    color: Colors.black87,
+  );
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-    primaryColor: primary,
-    scaffoldBackgroundColor: Colors.grey[300],
-    inputDecorationTheme: const InputDecorationTheme(
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: primary),
-      ),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: primary,
-          width: 2,
+      primaryColor: primary,
+      scaffoldBackgroundColor: Colors.grey[300],
+      inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: primary),
         ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: primary,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        iconColor: primary,
       ),
-      labelStyle: TextStyle(
-        color: Colors.grey,
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        elevation: 0,
+        color: primary,
       ),
-      iconColor: primary,
-    ),
-    appBarTheme: const AppBarTheme(
-      centerTitle: true,
-      elevation: 0,
-      color: primary,
-    ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: primary,
-      elevation: 0,
-    ),
-    // textTheme: lightTextTheme,
-  );
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: primary,
+        elevation: 0,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(
+            primary.withOpacity(0.1),
+          ),
+          shape: MaterialStateProperty.all(
+            const StadiumBorder(),
+          ),
+        ),
+      )
+      // textTheme: lightTextTheme,
+      );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: primary,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/screens.dart';
 
 class AppRoutes {
-  static const homeRoute = HomeScreen.routeName;
+  static const homeRoute = LoginScreen.routeName;
 
   static const screensOptions = <_ScreenRoute>[
     _ScreenRoute(
@@ -19,8 +19,8 @@ class AppRoutes {
       screen: ProductScreen(),
     ),
     _ScreenRoute(
-      route: LoadingScreen.routeName,
-      screen: LoadingScreen(),
+      route: SignUpScreen.routeName,
+      screen: SignUpScreen(),
     ),
   ];
 
