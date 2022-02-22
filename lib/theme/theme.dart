@@ -5,10 +5,14 @@ class AppTheme {
 
   static const double valueRadius = 25;
 
-  static const text20 = TextStyle(
+  static const text20Bold = TextStyle(
     fontSize: 20,
     color: Colors.white,
     fontWeight: FontWeight.bold,
+  );
+  static const text20 = TextStyle(
+    fontSize: 20,
+    color: Colors.white,
   );
   static const text15 = TextStyle(
     fontSize: 15,

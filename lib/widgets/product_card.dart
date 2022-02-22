@@ -86,7 +86,7 @@ class _NotAvailable extends StatelessWidget {
         fit: BoxFit.contain,
         child: Text(
           'Not Available',
-          style: AppTheme.text20,
+          style: AppTheme.text20Bold,
         ),
       ),
     );
@@ -119,7 +119,7 @@ class _PriceTag extends StatelessWidget {
         fit: BoxFit.contain,
         child: Text(
           '\$$price',
-          style: AppTheme.text20,
+          style: AppTheme.text20Bold,
         ),
       ),
     );
@@ -152,7 +152,7 @@ class _ProductDetails extends StatelessWidget {
         children: [
           Text(
             title,
-            style: AppTheme.text20,
+            style: AppTheme.text20Bold,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

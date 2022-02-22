@@ -35,6 +35,7 @@ class _App extends StatelessWidget {
       initialRoute: AppRoutes.homeRoute,
       routes: AppRoutes.getAppRoutes,
       theme: AppTheme.lightTheme,
+      scaffoldMessengerKey: NotificationsService.messengerKey,
     );
   }
 }
