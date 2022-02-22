@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:products_app_flutter/models/models.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,6 +16,8 @@ class ProductsService extends ChangeNotifier {
   bool isLoading = true;
   bool isSaving = false;
 
+  final storage = const FlutterSecureStorage();
+
   ProductsService() {
     loadProducts();
   }
@@ -22,7 +25,8 @@ class ProductsService extends ChangeNotifier {
   Future<List<Product>> loadProducts() async {
     isLoading = true;
     notifyListeners();
-    final url = Uri.https(_baseUrl, 'products.json');
+    final url = Uri.https(
+        _baseUrl, 'products.json', {'auth': await storage.read(key: 'token')});
     final response = await http.get(url);
     final Map<String, dynamic> productsMap = json.decode(response.body);
     productsMap.forEach(
@@ -52,7 +56,9 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String> updateProduct(Product product) async {
-    final url = Uri.https(_baseUrl, 'products/${product.id}.json');
+    final url = Uri.https(_baseUrl, 'products/${product.id}.json', {
+      'auth': await storage.read(key: 'token'),
+    });
     await http.put(url, body: product.toJson());
     final productIndex =
         products.indexWhere((element) => element.id == product.id);

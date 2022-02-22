@@ -14,6 +14,7 @@ class AuthService extends ChangeNotifier {
     final authData = <String, dynamic>{
       'email': email,
       'password': password,
+      'returnSecureToken': true,
     };
 
     final url = Uri.https(_baseUrl, 'v1/accounts:signUp', {
@@ -34,6 +35,7 @@ class AuthService extends ChangeNotifier {
     final authData = <String, dynamic>{
       'email': email,
       'password': password,
+      'returnSecureToken': true,
     };
 
     final url = Uri.https(_baseUrl, 'v1/accounts:signInWithPassword', {
