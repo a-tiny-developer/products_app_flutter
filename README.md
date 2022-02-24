@@ -5,6 +5,7 @@ Simple app to learn Flutter
 - CRUD
 - Firebase Auth
 - Firebase realtime database
+- Camera Access
 - Cloudinary Api
 
 App from [Flutter: Tu guía completa de desarrollo para IOS y Android](https://www.udemy.com/course/flutter-ios-android-fernando-herrera/)
