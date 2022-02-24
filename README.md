@@ -1,16 +1,14 @@
-# products_app_fluttes
+# Products App Flutter
 
-A new Flutter project.
+Simple app to learn Flutter
 
-## Getting Started
+- CRUD
+- Firebase Auth
+- Firebase realtime database
+- Cloudinary Api
 
-This project is a starting point for a Flutter application.
+App from [Flutter: Tu guía completa de desarrollo para IOS y Android](https://www.udemy.com/course/flutter-ios-android-fernando-herrera/)
 
-A few resources to get you started if this is your first Flutter project:
+https://user-images.githubusercontent.com/93559957/155446624-ad717322-0130-461c-abf6-8d2e9200d64c.mp4
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://user-images.githubusercontent.com/93559957/155446628-4908de0f-0373-4d11-9d01-e4c9b9b6197d.mp4
