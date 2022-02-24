@@ -67,7 +67,9 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String> createProduct(Product product) async {
-    final url = Uri.https(_baseUrl, 'products.json');
+    final url = Uri.https(_baseUrl, 'products.json', {
+      'auth': await storage.read(key: 'token'),
+    });
     final response = await http.post(url, body: product.toJson());
     final Map<String, dynamic> decodedData = json.decode(response.body);
     product.id = decodedData['name'];
